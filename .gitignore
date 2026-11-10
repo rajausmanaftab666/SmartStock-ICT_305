@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.vite/
+
+# Environment — these hold the database password and the session secret.
+# .env.example is committed as the template; .env never is.
+.env
+.env.local
+.env.*.local
+
+# Logs and coverage
+*.log
+npm-debug.log*
+coverage/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+
+# Microsoft Office scratch files
+~$*
+~WRL*.tmp
+*.tmp
