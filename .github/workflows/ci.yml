@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  server:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: smartstock
+          POSTGRES_PASSWORD: smartstock_ci
+          POSTGRES_DB: smartstock
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U smartstock -d smartstock"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://smartstock:smartstock_ci@localhost:5432/smartstock
+      DATABASE_SSL: "false"
+      SESSION_SECRET: ci-only-secret-not-used-anywhere-else
+      CLIENT_ORIGIN: http://localhost:5173
+      SEED_PASSWORD: demo1234
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: "**/package-lock.json"
+      - name: Install
+        run: |
+          npm ci
+          npm ci --prefix server
+      - name: Typecheck
+        run: npm run typecheck --prefix server
+      - name: Build database (schema + seed)
+        run: npm run db:setup --prefix server
+      - name: Tests
+        run: npm test --prefix server
