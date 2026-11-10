@@ -1,0 +1,81 @@
+# ===========================================================================
+# SmartStock — PostgreSQL in Docker
+#
+# WHY THIS EXISTS
+#
+# The project needs PostgreSQL 14+. Installing it natively means an installer,
+# a superuser password, a PATH entry for psql, a Windows service, and then
+# creating the smartstock role and database by hand before anything works.
+# Every one of those is a place to get stuck, and none of them teaches you
+# anything about this application.
+#
+# This file replaces all of it with one command. The container starts with the
+# role, the password and the database already created, so `npm run db:setup`
+# can apply the schema immediately.
+#
+# USAGE
+#   npm run db:up        start the database (waits until it is actually ready)
+#   npm run db:setup     apply schema.sql and load the demo data
+#   npm run dev          start the API and the web app
+#
+#   npm run db:down      stop the container, KEEP the data
+#   npm run db:destroy   stop the container and DELETE the data volume
+#   npm run db:psql      open a psql prompt inside the container
+#   npm run db:logs      follow the database log
+#
+# PORT 5433, NOT 5432
+#
+# A native PostgreSQL install already owns port 5432 on this machine, and two
+# servers cannot share a port. Mapping the container to 5433 on the host means
+# the two coexist and nothing has to be uninstalled or stopped.
+#
+# Inside the container PostgreSQL still listens on its normal 5432 — only the
+# host side is moved. To use a different host port, set POSTGRES_PORT in the
+# shell or in a .env file next to this one, and change DATABASE_URL in
+# server/.env to match.
+# ===========================================================================
+
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: smartstock-db
+    restart: unless-stopped
+
+    environment:
+      # The container creates this role, password and database on first start.
+      # They match DATABASE_URL in server/.env.example out of the box.
+      POSTGRES_USER: smartstock
+      POSTGRES_PASSWORD: smartstock_dev
+      POSTGRES_DB: smartstock
+
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+
+    volumes:
+      # A named volume, so stopping the container does not lose the data.
+      # `npm run db:destroy` is the only thing that deletes it.
+      - smartstock-pgdata:/var/lib/postgresql/data
+
+    healthcheck:
+      # `npm run db:up` passes --wait, which blocks until this reports healthy.
+      # Without it, db:setup can fire while PostgreSQL is still starting up and
+      # fail with "the database system is starting up".
+      test: ["CMD-SHELL", "pg_isready -U smartstock -d smartstock -q"]
+      interval: 3s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+    # Receiving stock holds SELECT ... FOR UPDATE row locks across a
+    # transaction. The defaults are ample for one developer, but a short lock
+    # timeout turns a genuine deadlock into a clear error instead of a hang.
+    command:
+      - postgres
+      - -c
+      - lock_timeout=10s
+      - -c
+      - idle_in_transaction_session_timeout=60s
+
+volumes:
+  smartstock-pgdata:
+    name: smartstock-pgdata

@@ -1,0 +1,32 @@
+{
+  "name": "smartstock",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SmartStock — stock ordering and inventory management (ICT302 Assessment 3)",
+  "scripts": {
+    "install:all": "npm --prefix server install && npm --prefix client install",
+    "dev": "concurrently -n server,client -c blue,green \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "db:up": "docker compose up -d --wait",
+    "db:down": "docker compose down",
+    "db:destroy": "docker compose down -v",
+    "db:logs": "docker compose logs -f db",
+    "db:psql": "docker compose exec db psql -U smartstock -d smartstock",
+    "db:reset": "npm --prefix server run db:reset",
+    "seed": "npm --prefix server run seed",
+    "db:setup": "npm --prefix server run db:setup",
+    "db:start": "npm run db:up && npm run db:setup",
+    "test": "npm --prefix server test",
+    "build": "npm --prefix server run build && npm --prefix client run build"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
