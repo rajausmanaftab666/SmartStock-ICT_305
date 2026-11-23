@@ -142,3 +142,42 @@ describe('user management (§6.2)', () => {
     await signIn(ACCOUNTS.admin, DEMO_PASSWORD);
   });
 });
+
+describe('settings (§6.10)', () => {
+  it('lets an administrator change them and refuses everyone else', async () => {
+    const admin = await signIn(ACCOUNTS.admin);
+    const staff = await signIn(ACCOUNTS.staff);
+
+    const original = (await admin.get('/api/settings')).body.settings;
+
+    expect(
+      (await staff.put('/api/settings').send({ ...original, company_name: 'Hacked' })).status
+    ).toBe(403);
+
+    const updated = await admin
+      .put('/api/settings')
+      .send({ ...original, company_name: 'SmartStock Test Co', default_min_stock_level: 15 });
+    expect(updated.status).toBe(200);
+    expect(updated.body.settings.company_name).toBe('SmartStock Test Co');
+    expect(updated.body.settings.default_min_stock_level).toBe(15);
+
+    // Put it back.
+    await admin.put('/api/settings').send(original);
+    expect((await admin.get('/api/settings')).body.settings.company_name).toBe(
+      original.company_name
+    );
+  });
+
+  it('validates the PO prefix and the minimum level', async () => {
+    const admin = await signIn(ACCOUNTS.admin);
+    const original = (await admin.get('/api/settings')).body.settings;
+
+    const response = await admin
+      .put('/api/settings')
+      .send({ ...original, po_number_prefix: 'bad prefix!', default_min_stock_level: -4 });
+
+    expect(response.status).toBe(400);
+    expect(response.body.fields.po_number_prefix).toBeTruthy();
+    expect(response.body.fields.default_min_stock_level).toBeTruthy();
+  });
+});

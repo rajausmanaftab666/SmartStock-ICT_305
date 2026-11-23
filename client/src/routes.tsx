@@ -12,6 +12,7 @@ import { ProductDetailPage } from './pages/Products/ProductDetailPage';
 import { ProductFormPage } from './pages/Products/ProductFormPage';
 import { ProductListPage } from './pages/Products/ProductListPage';
 import { ProfilePage } from './pages/Profile/ProfilePage';
+import { SettingsPage } from './pages/Settings/SettingsPage';
 import { RecordMovementPage } from './pages/Stock/RecordMovementPage';
 import { SupplierFormPage } from './pages/Suppliers/SupplierFormPage';
 import { SupplierListPage } from './pages/Suppliers/SupplierListPage';
@@ -148,6 +149,14 @@ export function AppRoutes() {
             element={
               <RequireRole roles={['admin']}>
                 <UserFormPage />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <RequireRole roles={['admin']}>
+                <SettingsPage />
               </RequireRole>
             }
           />

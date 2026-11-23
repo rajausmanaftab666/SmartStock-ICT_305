@@ -21,6 +21,7 @@ export const NAV_BY_ROLE: Record<Role, NavItem[]> = {
     { path: '/suppliers', label: 'Suppliers', icon: 'truck' },
     { path: '/products', label: 'Products', icon: 'box' },
     { path: '/alerts', label: 'Alerts', icon: 'alert', showsLowStockCount: true },
+    { path: '/settings', label: 'Settings', icon: 'gear' },
   ],
   staff: [
     { path: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
