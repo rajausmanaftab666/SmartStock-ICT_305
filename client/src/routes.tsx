@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { AppShell } from './components/AppShell';
+import { AlertsPage } from './pages/Alerts/AlertsPage';
 import { RequireAuth, RequireRole } from './components/guards';
 import { useAuth } from './hooks/useAuth';
 import { landingPathFor } from './navigation';
@@ -83,6 +84,16 @@ export function AppRoutes() {
             element={
               <RequireRole roles={['staff']}>
                 <RecordMovementPage />
+              </RequireRole>
+            }
+          />
+
+          {/* Managers reach low stock through their report instead (§7.2). */}
+          <Route
+            path="/alerts"
+            element={
+              <RequireRole roles={['admin', 'staff']}>
+                <AlertsPage />
               </RequireRole>
             }
           />
