@@ -15,9 +15,18 @@ export interface NavItem {
  * actually exist. The full set is reached at the end of Sprint 2.
  */
 export const NAV_BY_ROLE: Record<Role, NavItem[]> = {
-  admin:    [{ path: '/dashboard', label: 'Dashboard', icon: 'dashboard' }],
-  staff:    [{ path: '/dashboard', label: 'Dashboard', icon: 'dashboard' }],
-  manager:  [{ path: '/dashboard', label: 'Dashboard', icon: 'dashboard' }],
+  admin: [
+    { path: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
+    { path: '/suppliers', label: 'Suppliers', icon: 'truck' },
+  ],
+  staff: [
+    { path: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
+    { path: '/suppliers', label: 'Suppliers', icon: 'truck' },
+  ],
+  manager: [
+    { path: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
+    { path: '/suppliers', label: 'Suppliers', icon: 'truck' },
+  ],
   supplier: [],
 };
 
