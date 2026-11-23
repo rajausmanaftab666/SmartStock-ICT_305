@@ -1,6 +1,8 @@
 import express, { type Express } from 'express';
 import { sessionMiddleware } from './config/session';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
+import { authRoutes } from './modules/auth/auth.routes';
+import { settingsRoutes } from './modules/settings/settings.routes';
 
 /**
  * Assembles the API. Kept separate from server.ts so tests can mount the app
@@ -14,6 +16,8 @@ export function createApp(): Express {
   app.use(sessionMiddleware());
 
   // Feature routes are mounted here, one pull request at a time.
+  app.use('/api/auth', authRoutes);
+  app.use('/api/settings', settingsRoutes);
 
   app.use('/api', notFoundHandler);
   app.use(errorHandler);

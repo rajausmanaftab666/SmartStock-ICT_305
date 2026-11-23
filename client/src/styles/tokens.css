@@ -1,0 +1,78 @@
+/* ===========================================================================
+   SmartStock design tokens.
+
+   Single source of truth for colour, type, radius and spacing. Every value in
+   here is bound by the approved design; components reference the variables and
+   never hard-code a hex. The product ships in light theme — the dark palette
+   in the original design document was replaced during sign-off because light
+   screenshots read better in the report.
+   =========================================================================== */
+
+:root {
+  /* -- brand -------------------------------------------------------------- */
+  --primary: #0c5cab;
+  --primary-hover: #0a4a8a;
+  --primary-tint: #eff6ff;    /* active nav, selected card, focus wash */
+  --primary-tint-2: #f8fbff;  /* dashed add-line button background */
+
+  /* -- neutrals ----------------------------------------------------------- */
+  --page: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #fcfcfd;       /* table head, sticky form footer */
+  --surface-3: #f9fafb;       /* hover row, read-only input */
+  --border: #e4e7ec;
+  --border-2: #d0d5dd;        /* input border */
+  --divider: #f2f4f7;         /* row separator */
+  --text: #101828;
+  --text-2: #344054;          /* labels */
+  --muted: #667085;
+  --subtle: #98a2b3;
+
+  /* -- semantic ----------------------------------------------------------- */
+  --success: #10b981;
+  --success-fg: #027a48;
+  --success-bg: #ecfdf3;
+  --warning: #f59e0b;
+  --warning-fg: #b54708;
+  --warning-bg: #fffaeb;
+  --danger: #ef4444;
+  --danger-fg: #b42318;
+  --danger-bg: #fef3f2;
+  --danger-solid: #d92d20;
+  --danger-border: #fda29b;
+  --info-fg: #175cd3;
+  --info-bg: #eff8ff;
+  --violet-fg: #5925dc;
+  --violet-bg: #f4f3ff;
+
+  /* -- type --------------------------------------------------------------- */
+  --font: 'IBM Plex Sans', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', monospace; /* SKUs, PO numbers, references only */
+
+  /* -- radius ------------------------------------------------------------- */
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-pill: 999px;
+
+  /* -- spacing: 8pt baseline ---------------------------------------------- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-7: 28px;
+
+  /* -- elevation ---------------------------------------------------------- */
+  --shadow-card: 0 1px 3px rgba(16, 24, 40, 0.08);
+  --shadow-modal: 0 20px 40px rgba(16, 24, 40, 0.2);
+  --shadow-toast: 0 12px 24px rgba(16, 24, 40, 0.24);
+  --focus-ring: 0 0 0 3px rgba(12, 92, 171, 0.12);
+
+  /* -- layout ------------------------------------------------------------- */
+  --sidebar-w: 248px;
+  --sidebar-w-collapsed: 68px;
+  --topbar-h: 64px;
+  --page-max: 1440px;
+}

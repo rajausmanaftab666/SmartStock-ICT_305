@@ -1,0 +1,589 @@
+/* ===========================================================================
+   Screen-specific pieces: stat cards, the low-stock banner, the movement
+   preview, the purchase order builder, the receive footer and the timeline.
+   =========================================================================== */
+
+/* -- stat cards ------------------------------------------------------------- */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: var(--s-3);
+}
+
+.stat-card {
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  padding: var(--s-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  cursor: pointer;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+.stat-card:hover {
+  border-color: var(--border-2);
+  box-shadow: var(--shadow-card);
+}
+
+.stat-card__label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stat-card__value {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--text);
+}
+
+.stat-card__note {
+  font-size: 12px;
+  color: var(--subtle);
+}
+
+/* -- low stock banner ------------------------------------------------------- */
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: 14px var(--s-4);
+  border: 1px solid #fedf89;
+  background: #fffcf5;
+  border-radius: var(--r-md);
+}
+
+.banner__text {
+  flex: 1;
+  font-size: 14px;
+  color: #93370d;
+}
+
+.banner__action {
+  padding: 6px var(--s-3);
+  border: 1px solid #fedf89;
+  border-radius: 6px;
+  background: var(--surface);
+  color: #93370d;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.banner__action:hover {
+  background: var(--warning-bg);
+}
+
+/* -- S11 balance preview ---------------------------------------------------- */
+
+.preview {
+  margin: 0 var(--s-6) var(--s-6);
+  padding: var(--s-4);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: #fbfcfd;
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+  flex-wrap: wrap;
+}
+
+.preview__figure {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.preview__label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.preview__value {
+  font-size: 22px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.preview__arrow {
+  font-size: 20px;
+  color: var(--subtle);
+}
+
+.preview__message {
+  font-size: 13px;
+  max-width: 340px;
+  text-wrap: pretty;
+}
+
+/* The tone tracks the resulting balance: healthy, at/below minimum, negative. */
+.preview--success .preview__value--tone,
+.preview--success .preview__message {
+  color: var(--success-fg);
+}
+
+.preview--warning .preview__value--tone,
+.preview--warning .preview__message {
+  color: var(--warning-fg);
+}
+
+.preview--danger {
+  border-color: var(--danger-border);
+  background: var(--danger-bg);
+}
+
+.preview--danger .preview__value--tone,
+.preview--danger .preview__message {
+  color: var(--danger-fg);
+}
+
+/* -- S15 purchase order builder --------------------------------------------- */
+
+.po-header {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+}
+
+.po-price {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  height: 40px;
+}
+
+.po-remove {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--danger-fg);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.po-remove:hover {
+  background: var(--danger-bg);
+  border-color: var(--danger-border);
+}
+
+.po-footer {
+  padding: 14px var(--s-5);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+
+.po-add {
+  padding: var(--s-2) var(--s-3);
+  border: 1px dashed var(--primary);
+  border-radius: var(--r-md);
+  background: var(--primary-tint-2);
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.po-add:hover:not(:disabled) {
+  background: var(--primary-tint);
+}
+
+.po-add:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.po-totals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  min-width: 220px;
+}
+
+.po-totals__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.po-totals__row--grand {
+  align-items: baseline;
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--border);
+  color: var(--text);
+}
+
+.po-totals__row--grand span:first-child {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.po-totals__row--grand span:last-child {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* -- S18 receive footer ----------------------------------------------------- */
+
+.receive-footer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  align-items: end;
+}
+
+/* -- status timeline -------------------------------------------------------- */
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline__step {
+  display: flex;
+  gap: 14px;
+}
+
+.timeline__rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 16px;
+}
+
+.timeline__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: var(--r-pill);
+  background: var(--border);
+  border: 2px solid var(--surface);
+  box-shadow: 0 0 0 2px var(--divider);
+  margin-top: 4px;
+  flex: 0 0 auto;
+}
+
+.timeline__dot--reached {
+  background: var(--primary);
+  box-shadow: 0 0 0 2px rgba(12, 92, 171, 0.18);
+}
+
+.timeline__dot--rejected {
+  background: var(--danger);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.18);
+}
+
+.timeline__line {
+  flex: 1;
+  width: 2px;
+  background: var(--divider);
+  min-height: 26px;
+}
+
+.timeline__line--reached {
+  background: #d1e0f0;
+}
+
+.timeline__body {
+  flex: 1;
+  padding-bottom: var(--s-4);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.timeline__label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.timeline__meta {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* -- charts ----------------------------------------------------------------- */
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--s-3);
+}
+
+.chart-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  min-width: 0;
+}
+
+.chart-card__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.chart-card__note {
+  font-size: 12px;
+  color: var(--subtle);
+}
+
+.chart-legend {
+  display: flex;
+  gap: var(--s-4);
+  font-size: 13px;
+  color: #475467;
+}
+
+.chart-legend__swatch,
+.donut__swatch {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  margin-right: 6px;
+}
+
+.donut {
+  display: flex;
+  align-items: center;
+  gap: var(--s-6);
+  flex-wrap: wrap;
+}
+
+.donut__figure {
+  position: relative;
+  width: 160px;
+  flex: 0 0 160px;
+}
+
+.donut__centre {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.donut__total {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.donut__caption {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* The legend is the donut's direct label — it carries the count, so the
+   segments are never identified by colour alone. */
+.donut__legend {
+  flex: 1;
+  min-width: 180px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.donut__legend li {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+
+.donut__label {
+  flex: 1;
+  color: #475467;
+}
+
+.donut__value {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-tooltip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--s-2) var(--s-3);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.chart-tooltip__label {
+  font-weight: 600;
+}
+
+.chart-tooltip__row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.chart-tooltip__swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.chart-tooltip__name {
+  color: var(--muted);
+}
+
+.chart-tooltip__value {
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* -- manager approvals queue ------------------------------------------------ */
+
+.approval-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.approval-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--divider);
+  flex-wrap: wrap;
+}
+
+.approval-row:last-child {
+  border-bottom: 0;
+}
+
+.approval-row__link {
+  flex: 1;
+  min-width: 200px;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.approval-row__link:hover {
+  color: var(--primary);
+}
+
+/* -- S20 reports ------------------------------------------------------------ */
+
+.report-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: var(--s-3);
+}
+
+.report-card {
+  text-align: left;
+  padding: 14px var(--s-4);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+
+.report-card:hover {
+  border-color: var(--primary);
+}
+
+.report-card--active {
+  border-color: var(--primary);
+  background: var(--primary-tint-2);
+}
+
+.report-card__label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.report-card--active .report-card__label {
+  color: var(--primary);
+}
+
+.report-card__note {
+  font-size: 12px;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.report-filters {
+  padding: var(--s-4) var(--s-5);
+  display: flex;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  align-items: end;
+}
+
+.report-filters .field {
+  min-width: 150px;
+}
+
+/* -- S5 categories tab ------------------------------------------------------ */
+
+.category-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  align-items: end;
+}
+
+/* -- print: the purchase order only ----------------------------------------- */
+
+@media print {
+  .sidebar,
+  .topbar,
+  .page-header .btn-group,
+  .toast,
+  .modal-backdrop,
+  .table-card__toolbar,
+  .table-card__footer {
+    display: none !important;
+  }
+
+  .shell__main {
+    padding: 0;
+  }
+
+  .card,
+  .panel,
+  .table-card {
+    break-inside: avoid;
+    box-shadow: none;
+  }
+}
