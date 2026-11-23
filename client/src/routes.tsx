@@ -7,7 +7,12 @@ import { DashboardPage } from './pages/Dashboard/DashboardPage';
 import { ForbiddenPage } from './pages/Forbidden/ForbiddenPage';
 import { LoginPage } from './pages/Login/LoginPage';
 import { NotFoundPage } from './pages/NotFound/NotFoundPage';
+import { ProductDetailPage } from './pages/Products/ProductDetailPage';
+import { ProductFormPage } from './pages/Products/ProductFormPage';
+import { ProductListPage } from './pages/Products/ProductListPage';
 import { ProfilePage } from './pages/Profile/ProfilePage';
+import { SupplierFormPage } from './pages/Suppliers/SupplierFormPage';
+import { SupplierListPage } from './pages/Suppliers/SupplierListPage';
 
 /** Sends "/" to whichever screen this role starts on. */
 function HomeRedirect() {
@@ -33,6 +38,66 @@ export function AppRoutes() {
             element={
               <RequireRole roles={[...CATALOGUE_READERS]}>
                 <DashboardPage />
+              </RequireRole>
+            }
+          />
+
+          {/* Catalogue — managers read, admin and staff maintain. */}
+          <Route
+            path="/products"
+            element={
+              <RequireRole roles={[...CATALOGUE_READERS]}>
+                <ProductListPage />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/products/new"
+            element={
+              <RequireRole roles={['admin', 'staff']}>
+                <ProductFormPage />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/products/:id"
+            element={
+              <RequireRole roles={[...CATALOGUE_READERS]}>
+                <ProductDetailPage />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/products/:id/edit"
+            element={
+              <RequireRole roles={['admin', 'staff']}>
+                <ProductFormPage />
+              </RequireRole>
+            }
+          />
+
+          {/* Suppliers are administrator-owned (§7.3). */}
+          <Route
+            path="/suppliers"
+            element={
+              <RequireRole roles={[...CATALOGUE_READERS]}>
+                <SupplierListPage />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/suppliers/new"
+            element={
+              <RequireRole roles={['admin']}>
+                <SupplierFormPage />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/suppliers/:id/edit"
+            element={
+              <RequireRole roles={['admin']}>
+                <SupplierFormPage />
               </RequireRole>
             }
           />
