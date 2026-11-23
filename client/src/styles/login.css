@@ -1,0 +1,234 @@
+/* ===========================================================================
+   S1 — login. The one screen with a gradient, and the only public route.
+   =========================================================================== */
+
+.login {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  background: var(--surface);
+}
+
+.login__hero {
+  padding: 56px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(160deg, #0c5cab 0%, #0a4a8a 58%, #083a6d 100%);
+  color: #fafafa;
+}
+
+.login__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.login__logo {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-md);
+  background: #fff;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.login__wordmark {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.login__pitch {
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+
+.login__headline {
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+
+.login__lede {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(250, 250, 250, 0.72);
+  text-wrap: pretty;
+}
+
+.login__stats {
+  display: flex;
+  gap: 32px;
+  padding-top: var(--s-2);
+}
+
+.login__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.login__stat-value {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.login__stat-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(250, 250, 250, 0.6);
+}
+
+.login__footnote {
+  font-size: 12px;
+  color: rgba(250, 250, 250, 0.5);
+}
+
+/* -- form side -------------------------------------------------------------- */
+
+.login__panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+}
+
+.login__form {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+  animation: ss-fade 0.3s ease both;
+}
+
+.login__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.login__title {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.login__error {
+  display: flex;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid #fecdca;
+  background: var(--danger-bg);
+  border-radius: var(--r-md);
+  font-size: 14px;
+  color: var(--danger-fg);
+}
+
+.login__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.login__password {
+  position: relative;
+  display: flex;
+}
+
+.login__password .input {
+  padding-right: 68px;
+}
+
+.login__reveal {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  height: 30px;
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: var(--r-sm);
+}
+
+.login__reveal:hover {
+  background: var(--primary-tint);
+}
+
+.login__submit {
+  height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* -- demo credentials (development builds only) ----------------------------- */
+
+.login__demo {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px;
+  background: #fbfcfd;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login__demo-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.login__demo-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.login__chip {
+  padding: 6px 10px;
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  font-size: 13px;
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.login__chip:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* -- responsive ------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .login {
+    grid-template-columns: 1fr;
+  }
+
+  .login__hero {
+    padding: 32px;
+    gap: var(--s-6);
+  }
+
+  .login__headline {
+    font-size: 26px;
+  }
+}

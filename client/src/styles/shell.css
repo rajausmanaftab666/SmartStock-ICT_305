@@ -1,0 +1,323 @@
+/* ===========================================================================
+   Application shell: sidebar, topbar, main column and page header.
+   =========================================================================== */
+
+.shell {
+  min-height: 100vh;
+  display: flex;
+  background: var(--page);
+}
+
+.shell__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.shell__main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--page-max);
+  padding: var(--s-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+
+/* -- sidebar ---------------------------------------------------------------- */
+
+.sidebar {
+  width: var(--sidebar-w);
+  flex: 0 0 var(--sidebar-w);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar__brand {
+  height: var(--topbar-h);
+  flex: 0 0 var(--topbar-h);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 var(--s-5);
+  border-bottom: 1px solid var(--divider);
+}
+
+.sidebar__logo {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border-radius: 6px;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.sidebar__names {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  min-width: 0;
+}
+
+.sidebar__product {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.sidebar__company {
+  font-size: 11px;
+  color: var(--subtle);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar__nav {
+  flex: 1;
+  padding: var(--s-3);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 6px;
+  color: #475467;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-item:hover {
+  background: var(--divider);
+  color: #475467;
+  text-decoration: none;
+}
+
+.nav-item--active,
+.nav-item--active:hover {
+  background: var(--primary-tint);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.nav-item__icon {
+  flex: 0 0 18px;
+  opacity: 0.9;
+}
+
+.nav-item__label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-item__count {
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--r-pill);
+  background: var(--danger-bg);
+  color: var(--danger-fg);
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* -- topbar ----------------------------------------------------------------- */
+
+.topbar {
+  height: var(--topbar-h);
+  flex: 0 0 var(--topbar-h);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  padding: 0 var(--s-7);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.topbar__crumbs {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.topbar__sep {
+  color: var(--border-2);
+}
+
+.topbar__page {
+  color: var(--text);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topbar__bell {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: #475467;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.topbar__bell:hover {
+  border-color: var(--border-2);
+  background: var(--surface-3);
+}
+
+.topbar__bell-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--r-pill);
+  background: var(--danger-solid);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--surface);
+}
+
+.topbar__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: var(--s-3);
+  border-left: 1px solid var(--border);
+}
+
+.topbar__avatar {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  border-radius: var(--r-pill);
+  background: var(--primary-tint);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.topbar__identity {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.topbar__name {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.topbar__role {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* -- page header ------------------------------------------------------------ */
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--s-5);
+  flex-wrap: wrap;
+}
+
+.page-header__text {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.page-header__back {
+  align-self: flex-start;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+/* -- responsive ------------------------------------------------------------- */
+
+/* Below 1100px the sidebar keeps only its icons, per the design brief. */
+@media (max-width: 1100px) {
+  .sidebar {
+    width: var(--sidebar-w-collapsed);
+    flex-basis: var(--sidebar-w-collapsed);
+  }
+
+  .sidebar__brand {
+    padding: 0;
+    justify-content: center;
+  }
+
+  .sidebar__names,
+  .nav-item__label,
+  .nav-item__count {
+    display: none;
+  }
+
+  .nav-item {
+    justify-content: center;
+    padding: 10px 0;
+  }
+
+  .shell__main,
+  .topbar {
+    padding-left: var(--s-5);
+    padding-right: var(--s-5);
+  }
+}
+
+@media (max-width: 860px) {
+  .topbar__identity {
+    display: none;
+  }
+}

@@ -1,0 +1,204 @@
+/* ===========================================================================
+   DataTable, panels and the modal summary. Ported from the prototype's
+   inline styles.
+   =========================================================================== */
+
+.table-card {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.table-card__toolbar {
+  padding: 14px var(--s-5);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.table-card__title {
+  margin-right: var(--s-1);
+}
+
+.table-card__search {
+  min-width: 240px;
+  width: auto;
+  flex: 0 1 280px;
+}
+
+.table-card__tabs {
+  display: flex;
+  gap: var(--s-1);
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: #475467;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pill--active {
+  border-color: var(--primary);
+  background: var(--primary-tint);
+  color: var(--primary);
+}
+
+/* Wide tables scroll inside the card rather than the page. */
+.table-card__scroll {
+  overflow-x: auto;
+}
+
+.table-card th {
+  text-align: left;
+  padding: 10px var(--s-4);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.table-card th.is-sortable {
+  cursor: pointer;
+}
+
+.table-card th.is-sortable:hover {
+  color: var(--text-2);
+}
+
+.table-card td {
+  padding: 14px var(--s-4);
+  border-bottom: 1px solid var(--divider);
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.table-card tbody tr.is-clickable {
+  cursor: pointer;
+}
+
+.table-card tbody tr:hover {
+  background: var(--surface-3);
+}
+
+/* Rows at or below their minimum stock level (BR15). */
+.table-card tbody tr.is-tinted {
+  background: #fffbfa;
+}
+
+.table-card tbody tr.is-tinted:hover {
+  background: #fff5f4;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cell__sub {
+  font-size: 12px;
+  color: var(--subtle);
+}
+
+.cell__actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.table-card__footer {
+  padding: var(--s-3) var(--s-5);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  background: var(--surface-2);
+}
+
+.table-card__count {
+  flex: 1;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* -- panels ----------------------------------------------------------------- */
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--s-3);
+}
+
+.panel {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  padding: var(--s-5);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.panel__head {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.panel__rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel__row {
+  display: flex;
+  gap: var(--s-3);
+  padding: 9px 0;
+  border-bottom: 1px solid var(--divider);
+  font-size: 14px;
+}
+
+.panel__row:last-child {
+  border-bottom: 0;
+}
+
+.panel__label {
+  flex: 1;
+  color: var(--muted);
+}
+
+.panel__value {
+  font-weight: 500;
+  text-align: right;
+}
+
+.panel__action {
+  align-self: flex-start;
+}
+
+/* -- modal summary rows ----------------------------------------------------- */
+
+.modal__summary-row {
+  display: flex;
+  gap: var(--s-3);
+  font-size: 13px;
+}
+
+.modal__summary-row > span:first-child {
+  flex: 1;
+  color: #475467;
+}
