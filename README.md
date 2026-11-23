@@ -9,7 +9,7 @@ product catalogue, one stock ledger and one purchase-order workflow.
 | | |
 |---|---|
 | Project board | <link> |
-| Staging | arrives in Sprint 1 |
+| Staging | <set after the first deploy> |
 | Working agreement | [docs/WORKING_AGREEMENT.md](docs/WORKING_AGREEMENT.md) |
 | Definition of Done | [docs/DEFINITION_OF_DONE.md](docs/DEFINITION_OF_DONE.md) |
 
@@ -27,6 +27,38 @@ npm run db:up        # PostgreSQL 17 in Docker on port 5433
 npm run db:setup     # schema + demo data
 npm test
 ```
+
+## Staging
+One Render web service, one Supabase database. In production Express serves the built React app
+as well as the API, so the site and the API share a single origin and the session cookie needs no
+cross-site set-up. There is no separate front-end host.
+
+| | |
+|---|---|
+| URL | <set after the first deploy> |
+| Deploys from | `main`, automatically |
+| Regions | Render: Singapore · Supabase: Sydney |
+
+Build command:
+
+```bash
+npm ci --include=dev && npm ci --include=dev --prefix server && npm ci --include=dev --prefix client && npm run build --prefix client
+```
+
+Start command:
+
+```bash
+npm start --prefix server
+```
+
+`--include=dev` is not optional: `NODE_ENV=production` makes npm skip devDependencies, and the
+client build needs Vite while the server starts through tsx.
+
+Environment variables live in the Render dashboard and are never committed — `NODE_ENV`,
+`DATABASE_URL`, `DATABASE_SSL`, `DATABASE_MAX_CONNECTIONS`, `SESSION_SECRET`, `CLIENT_ORIGIN`,
+`NODE_VERSION`. Render supplies `PORT` itself.
+
+Step-by-step instructions: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 ## Branching
 `main` is protected. Work on `feature/<story-id>-<name>` or `chore/<id>-<name>` branches and

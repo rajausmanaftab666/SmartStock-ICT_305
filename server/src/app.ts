@@ -1,4 +1,6 @@
+import { join, resolve } from 'node:path';
 import express, { type Express } from 'express';
+import { env } from './config/env';
 import { sessionMiddleware } from './config/session';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 import { authRoutes } from './modules/auth/auth.routes';
@@ -30,6 +32,25 @@ export function createApp(): Express {
   app.use('/api/settings', settingsRoutes);
 
   app.use('/api', notFoundHandler);
+
+  // In production Express also serves the built React app, so the site and the
+  // API share one origin and the session cookie needs no cross-site set-up.
+  if (env.NODE_ENV === 'production') {
+    // Render terminates TLS at its own proxy and forwards plain HTTP. Without
+    // this, Express believes the connection is insecure and express-session
+    // silently refuses to send the `secure` session cookie, so nobody can sign
+    // in.
+    app.set('trust proxy', 1);
+
+    const dist = resolve(__dirname, '../../client/dist');
+    app.use(express.static(dist));
+
+    // Anything that is not an API call is handed to the single-page app so a
+    // deep link such as /products/9 survives a refresh. Unknown /api paths are
+    // excluded and still get the JSON 404 from notFoundHandler above.
+    app.get(/^\/(?!api).*/, (_req, res) => res.sendFile(join(dist, 'index.html')));
+  }
+
   app.use(errorHandler);
 
   return app;
