@@ -50,3 +50,19 @@ jobs:
         run: npm run db:setup --prefix server
       - name: Tests
         run: npm test --prefix server
+
+  client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: "**/package-lock.json"
+      - name: Install
+        run: |
+          npm ci
+          npm ci --prefix client
+      - name: Typecheck and build
+        run: npm run build --prefix client
