@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { AppShell } from './components/AppShell';
+import { AlertsPage } from './pages/Alerts/AlertsPage';
 import { RequireAuth, RequireRole } from './components/guards';
 import { useAuth } from './hooks/useAuth';
 import { landingPathFor } from './navigation';
@@ -11,6 +12,7 @@ import { ProductDetailPage } from './pages/Products/ProductDetailPage';
 import { ProductFormPage } from './pages/Products/ProductFormPage';
 import { ProductListPage } from './pages/Products/ProductListPage';
 import { ProfilePage } from './pages/Profile/ProfilePage';
+import { RecordMovementPage } from './pages/Stock/RecordMovementPage';
 import { SupplierFormPage } from './pages/Suppliers/SupplierFormPage';
 import { SupplierListPage } from './pages/Suppliers/SupplierListPage';
 
@@ -72,6 +74,26 @@ export function AppRoutes() {
             element={
               <RequireRole roles={['admin', 'staff']}>
                 <ProductFormPage />
+              </RequireRole>
+            }
+          />
+
+          {/* Recording stock is inventory staff's job alone. */}
+          <Route
+            path="/stock/record"
+            element={
+              <RequireRole roles={['staff']}>
+                <RecordMovementPage />
+              </RequireRole>
+            }
+          />
+
+          {/* Managers reach low stock through their report instead (§7.2). */}
+          <Route
+            path="/alerts"
+            element={
+              <RequireRole roles={['admin', 'staff']}>
+                <AlertsPage />
               </RequireRole>
             }
           />

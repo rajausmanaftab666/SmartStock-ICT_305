@@ -19,11 +19,14 @@ export const NAV_BY_ROLE: Record<Role, NavItem[]> = {
     { path: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
     { path: '/suppliers', label: 'Suppliers', icon: 'truck' },
     { path: '/products', label: 'Products', icon: 'box' },
+    { path: '/alerts', label: 'Alerts', icon: 'alert', showsLowStockCount: true },
   ],
   staff: [
     { path: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
     { path: '/products', label: 'Products', icon: 'box' },
+    { path: '/stock/record', label: 'Record stock', icon: 'plus' },
     { path: '/suppliers', label: 'Suppliers', icon: 'truck' },
+    { path: '/alerts', label: 'Alerts', icon: 'alert', showsLowStockCount: true },
   ],
   manager: [
     { path: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
