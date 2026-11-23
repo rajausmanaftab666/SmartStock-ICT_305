@@ -4,6 +4,7 @@ import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 import { authRoutes } from './modules/auth/auth.routes';
 import { categoryRoutes } from './modules/categories/categories.routes';
 import { movementRoutes } from './modules/movements/movements.routes';
+import { userRoutes } from './modules/users/users.routes';
 import { productRoutes } from './modules/products/products.routes';
 import { settingsRoutes } from './modules/settings/settings.routes';
 import { supplierRoutes } from './modules/suppliers/suppliers.routes';
@@ -22,6 +23,7 @@ export function createApp(): Express {
   // Feature routes are mounted here, one pull request at a time.
   app.use('/api/auth', authRoutes);
   app.use('/api/categories', categoryRoutes);
+  app.use('/api/users', userRoutes);
   app.use('/api/products', productRoutes);
   app.use('/api/stock-movements', movementRoutes);
   app.use('/api/suppliers', supplierRoutes);

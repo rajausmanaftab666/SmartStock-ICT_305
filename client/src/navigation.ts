@@ -17,9 +17,11 @@ export interface NavItem {
 export const NAV_BY_ROLE: Record<Role, NavItem[]> = {
   admin: [
     { path: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
+    { path: '/users', label: 'Users', icon: 'users' },
     { path: '/suppliers', label: 'Suppliers', icon: 'truck' },
     { path: '/products', label: 'Products', icon: 'box' },
     { path: '/alerts', label: 'Alerts', icon: 'alert', showsLowStockCount: true },
+    { path: '/settings', label: 'Settings', icon: 'gear' },
   ],
   staff: [
     { path: '/dashboard', label: 'Dashboard', icon: 'dashboard' },

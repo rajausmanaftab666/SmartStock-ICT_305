@@ -12,9 +12,12 @@ import { ProductDetailPage } from './pages/Products/ProductDetailPage';
 import { ProductFormPage } from './pages/Products/ProductFormPage';
 import { ProductListPage } from './pages/Products/ProductListPage';
 import { ProfilePage } from './pages/Profile/ProfilePage';
+import { SettingsPage } from './pages/Settings/SettingsPage';
 import { RecordMovementPage } from './pages/Stock/RecordMovementPage';
 import { SupplierFormPage } from './pages/Suppliers/SupplierFormPage';
 import { SupplierListPage } from './pages/Suppliers/SupplierListPage';
+import { UserFormPage } from './pages/Users/UserFormPage';
+import { UserListPage } from './pages/Users/UserListPage';
 
 /** Sends "/" to whichever screen this role starts on. */
 function HomeRedirect() {
@@ -120,6 +123,40 @@ export function AppRoutes() {
             element={
               <RequireRole roles={['admin']}>
                 <SupplierFormPage />
+              </RequireRole>
+            }
+          />
+
+          {/* User administration and settings are the administrator's alone. */}
+          <Route
+            path="/users"
+            element={
+              <RequireRole roles={['admin']}>
+                <UserListPage />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/users/new"
+            element={
+              <RequireRole roles={['admin']}>
+                <UserFormPage />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/users/:id/edit"
+            element={
+              <RequireRole roles={['admin']}>
+                <UserFormPage />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <RequireRole roles={['admin']}>
+                <SettingsPage />
               </RequireRole>
             }
           />
