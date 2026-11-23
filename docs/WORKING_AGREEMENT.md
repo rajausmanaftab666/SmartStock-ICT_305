@@ -4,10 +4,10 @@
 | Role | Member |
 |---|---|
 | Client liaison / Product Owner proxy, Documentation lead | Navpinderdeep Singh Thind |
-| Tech lead | Mohammadanas Iqbalhusen |
+| Tech lead | Mohammadanas Tintoiya |
 | QA lead | Gurkirat Singh |
 | DevOps lead | Raja Usman Aftab |
-| Scrum master (rotating) | Sprint 0 Raja, Sprint 1 Gurkirat, Sprint 2 Mohammadanas, Release Navpinderdeep |
+| Scrum master | Gurkirat Singh |
 
 ## Meetings
 - Sprint planning: after class on the Wednesday each sprint starts (30 min).
