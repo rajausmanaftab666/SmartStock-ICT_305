@@ -18,13 +18,16 @@ export const NAV_BY_ROLE: Record<Role, NavItem[]> = {
   admin: [
     { path: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
     { path: '/suppliers', label: 'Suppliers', icon: 'truck' },
+    { path: '/products', label: 'Products', icon: 'box' },
   ],
   staff: [
     { path: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
+    { path: '/products', label: 'Products', icon: 'box' },
     { path: '/suppliers', label: 'Suppliers', icon: 'truck' },
   ],
   manager: [
     { path: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
+    { path: '/products', label: 'Products', icon: 'box' },
     { path: '/suppliers', label: 'Suppliers', icon: 'truck' },
   ],
   supplier: [],
