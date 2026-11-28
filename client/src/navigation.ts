@@ -38,7 +38,7 @@ export const NAV_BY_ROLE: Record<Role, NavItem[]> = {
     { path: '/products', label: 'Products', icon: 'box' },
     { path: '/suppliers', label: 'Suppliers', icon: 'truck' },
   ],
-  supplier: [],
+  supplier: [{ path: '/supplier/orders', label: 'My orders', icon: 'doc' }],
 };
 
 /** Where each role lands after signing in (§5.1 step 4). */
