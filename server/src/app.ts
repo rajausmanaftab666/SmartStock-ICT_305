@@ -8,6 +8,7 @@ import { categoryRoutes } from './modules/categories/categories.routes';
 import { movementRoutes } from './modules/movements/movements.routes';
 import { userRoutes } from './modules/users/users.routes';
 import { productRoutes } from './modules/products/products.routes';
+import { purchaseOrderRoutes } from './modules/purchaseOrders/purchaseOrders.routes';
 import { settingsRoutes } from './modules/settings/settings.routes';
 import { supplierRoutes } from './modules/suppliers/suppliers.routes';
 
@@ -27,6 +28,7 @@ export function createApp(): Express {
   app.use('/api/categories', categoryRoutes);
   app.use('/api/users', userRoutes);
   app.use('/api/products', productRoutes);
+  app.use('/api/purchase-orders', purchaseOrderRoutes);
   app.use('/api/stock-movements', movementRoutes);
   app.use('/api/suppliers', supplierRoutes);
   app.use('/api/settings', settingsRoutes);
