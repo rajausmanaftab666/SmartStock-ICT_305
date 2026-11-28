@@ -12,6 +12,9 @@ import { ProductDetailPage } from './pages/Products/ProductDetailPage';
 import { ProductFormPage } from './pages/Products/ProductFormPage';
 import { ProductListPage } from './pages/Products/ProductListPage';
 import { ProfilePage } from './pages/Profile/ProfilePage';
+import { PurchaseOrderDetailPage } from './pages/PurchaseOrders/PurchaseOrderDetailPage';
+import { PurchaseOrderFormPage } from './pages/PurchaseOrders/PurchaseOrderFormPage';
+import { PurchaseOrderListPage } from './pages/PurchaseOrders/PurchaseOrderListPage';
 import { SettingsPage } from './pages/Settings/SettingsPage';
 import { RecordMovementPage } from './pages/Stock/RecordMovementPage';
 import { SupplierFormPage } from './pages/Suppliers/SupplierFormPage';
@@ -157,6 +160,40 @@ export function AppRoutes() {
             element={
               <RequireRole roles={['admin']}>
                 <SettingsPage />
+              </RequireRole>
+            }
+          />
+
+          {/* Purchase orders — all four roles read; the actions differ. */}
+          <Route
+            path="/purchase-orders"
+            element={
+              <RequireRole roles={[...CATALOGUE_READERS]}>
+                <PurchaseOrderListPage />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/purchase-orders/new"
+            element={
+              <RequireRole roles={['staff']}>
+                <PurchaseOrderFormPage />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/purchase-orders/:id"
+            element={
+              <RequireRole roles={[...CATALOGUE_READERS]}>
+                <PurchaseOrderDetailPage />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/purchase-orders/:id/edit"
+            element={
+              <RequireRole roles={['staff']}>
+                <PurchaseOrderFormPage />
               </RequireRole>
             }
           />
