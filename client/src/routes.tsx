@@ -17,6 +17,7 @@ import { PurchaseOrderFormPage } from './pages/PurchaseOrders/PurchaseOrderFormP
 import { PurchaseOrderListPage } from './pages/PurchaseOrders/PurchaseOrderListPage';
 import { SettingsPage } from './pages/Settings/SettingsPage';
 import { RecordMovementPage } from './pages/Stock/RecordMovementPage';
+import { SupplierOrdersPage } from './pages/Supplier/SupplierOrdersPage';
 import { SupplierFormPage } from './pages/Suppliers/SupplierFormPage';
 import { SupplierListPage } from './pages/Suppliers/SupplierListPage';
 import { UserFormPage } from './pages/Users/UserFormPage';
@@ -194,6 +195,24 @@ export function AppRoutes() {
             element={
               <RequireRole roles={['staff']}>
                 <PurchaseOrderFormPage />
+              </RequireRole>
+            }
+          />
+
+          {/* The supplier portal: two screens, and nothing else. */}
+          <Route
+            path="/supplier/orders"
+            element={
+              <RequireRole roles={['supplier']}>
+                <SupplierOrdersPage />
+              </RequireRole>
+            }
+          />
+          <Route
+            path="/supplier/orders/:id"
+            element={
+              <RequireRole roles={['supplier']}>
+                <PurchaseOrderDetailPage supplierView />
               </RequireRole>
             }
           />
